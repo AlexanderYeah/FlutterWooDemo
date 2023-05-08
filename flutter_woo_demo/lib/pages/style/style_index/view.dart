@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_woo_demo/common/i18n/index.dart';
+import 'package:flutter_woo_demo/common/widgets/icon.dart';
 import 'package:get/get.dart';
 import 'package:flutter_woo_demo/common/index.dart';
 import 'index.dart';
@@ -12,6 +13,10 @@ class StyleIndexPage extends GetView<StyleIndexController> {
     return Column(
       children: [
         ListTile(
+            leading: IconWidget.svg(
+              AssetsSvgs.cHomeSvg,
+              size: 30,
+            ),
             onTap: () {
               controller.onTap();
               ConfigService.to.switchThemeModel();
