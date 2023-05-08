@@ -3,9 +3,9 @@ import './index.dart';
 
 class AppTheme {
   // 亮色
-  static ThemeData light = ThemeData(
-    colorScheme: lightColorScheme,
-  );
+  static ThemeData light =
+      ThemeData(colorScheme: lightColorScheme, fontFamily: "Montserrat");
   // 暗色主题
-  static ThemeData dark = ThemeData(colorScheme: darkColorScheme);
+  static ThemeData dark =
+      ThemeData(colorScheme: darkColorScheme, fontFamily: "Montserrat");
 }

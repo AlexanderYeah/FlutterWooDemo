@@ -12,12 +12,11 @@ class StyleIndexPage extends GetView<StyleIndexController> {
     return Column(
       children: [
         ListTile(
-          onTap: () {
-            controller.onTap();
-            ConfigService.to.switchThemeModel();
-          },
-          title: Text("语言${ConfigService.to.locale}"),
-        )
+            onTap: () {
+              controller.onTap();
+              ConfigService.to.switchThemeModel();
+            },
+            title: TextWidget(text: "语言${ConfigService.to.locale}"))
       ],
     );
   }
