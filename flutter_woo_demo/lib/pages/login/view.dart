@@ -18,6 +18,12 @@ class LoginPage extends GetView<LoginController> {
               controller.onTap(DateTime.now().microsecondsSinceEpoch);
             },
             child: const Text("点击"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Get.toNamed("/splash");
+            },
+            child: const Text("splash"),
           )
         ],
       ),
