@@ -4,7 +4,6 @@ import 'package:flutter_woo_demo/common/index.dart';
 import 'package:flutter_woo_demo/common/style/index.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-
 import '../i18n/index.dart';
 
 //package_info_plus  获取当前应用的版本号/获取当前应用的名字/获取当前应用的开发者
