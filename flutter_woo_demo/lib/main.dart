@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_woo_demo/global.dart';
 import 'package:get/get.dart';
+import 'common/index.dart';
 
-import 'common/routers/pages.dart';
-
-void main() {
+// 保证service 正常的初始化
+Future<void> main() async {
+  await Global.init();
   runApp(const MyApp());
 }
 
@@ -14,12 +15,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primaryColor: Colors.blue,
-        ),
-        initialRoute: "/",
-        getPages: RoutePages.list);
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primaryColor: Colors.blue,
+      ),
+      initialRoute: "/splash",
+      getPages: RoutePages.list,
+      navigatorObservers: [RoutePages.observer],
+    );
   }
 }
 
@@ -27,14 +30,12 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
   final String title;
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

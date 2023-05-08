@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_woo_demo/common/services/config.dart';
 import 'package:get/get.dart';
 
 import 'index.dart';
@@ -8,24 +9,7 @@ class SplashPage extends GetView<SplashController> {
 
   // 主视图
   Widget _buildView() {
-    return Center(
-        child: Column(
-      children: [
-        GetBuilder<SplashController>(
-          id: "splash_title",
-          builder: (controller) {
-            return Center(
-              child: Text(controller.title),
-            );
-          },
-        ),
-        ElevatedButton(
-            onPressed: () {
-              controller.onTap(DateTime.now().microsecondsSinceEpoch);
-            },
-            child: const Text("点击"))
-      ],
-    ));
+    return Center(child: Text("版本号:${ConfigService.to.version}"));
   }
 
   @override

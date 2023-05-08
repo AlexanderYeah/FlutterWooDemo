@@ -1,18 +1,13 @@
 import 'package:get/get.dart';
 
-class SplashController extends GetxController {
-  SplashController();
+class GoodsController extends GetxController {
+  GoodsController();
 
   _initData() {
-    update(["splash"]);
+    update(["goods"]);
   }
 
-  String title = "";
-
-  void onTap(int index) {
-    title = "GetBuilder -> 点击了 $index 个按钮";
-    update(["splash_title"]);
-  }
+  void onTap() {}
 
   // @override
   // void onInit() {

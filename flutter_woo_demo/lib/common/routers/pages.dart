@@ -1,16 +1,22 @@
-import 'package:flutter_woo_demo/pages/login/index.dart';
-import 'package:flutter_woo_demo/pages/splash/index.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_woo_demo/common/routers/index.dart';
+import 'package:flutter_woo_demo/pages/system/main/binds.dart';
+
+import '../../pages/index.dart';
 import 'package:get/get.dart';
 
-// Binding 类是一个将依赖注入进行分离，同时“绑定”到 状态管理器Controller 和 路由管理器中，
-//简单说，就是把UI 中的 控制器实例化部分抽离出来了，抽离时需要实现 Bindings 类
-
-// 路由信息
 class RoutePages {
+  static final RouteObserver observer = RouteObservers();
+
+  // 路由的堆栈历史信息
+  static List<String> history = [];
+
   static List<GetPage> list = [
-    // login
-    GetPage(name: "/", page: () => const LoginPage(), binding: LoginBinding()),
+    // 首页
+    GetPage(name: '/', page: () => const MainPage(), binding: MainBinding()),
     // splash
-    GetPage(name: "/splash", page: () => const SplashPage()),
+    GetPage(name: '/splash', page: () => const SplashPage()),
+    // welcome
+    GetPage(name: '/splash', page: () => const WelcomePage())
   ];
 }
