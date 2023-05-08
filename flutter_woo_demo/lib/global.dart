@@ -10,6 +10,8 @@ class Global {
     WidgetsFlutterBinding.ensureInitialized();
     // 实例化存储类
     await Storage().init();
+    // 依赖注入 实例化网络请求工具
+    Get.put<WPHttpService>(WPHttpService());
     // Get.put 方式直接注入
     await Future.wait([
       Get.putAsync<ConfigService>(() async => await ConfigService().init())

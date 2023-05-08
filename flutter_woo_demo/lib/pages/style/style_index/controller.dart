@@ -1,12 +1,19 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_woo_demo/common/i18n/index.dart';
 import 'package:flutter_woo_demo/common/index.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Response;
 
 class StyleIndexController extends GetxController {
   StyleIndexController();
 
   _initData() {
     update(["style_index"]);
+  }
+
+  void loadData() async {
+    // Response rsp =
+    //     await WPHttpService.to.get("/rank", params: {"responseId": "9779193"});
+    // print(rsp);
   }
 
   void onTap() {
@@ -17,6 +24,7 @@ class StyleIndexController extends GetxController {
             ? zh
             : en);
     update(['style_index']);
+    loadData();
   }
 
   // @override
