@@ -8,6 +8,8 @@ class Global {
     // WidgetsFlutterBinding.ensureInitialized();
     //这个表示先就行原生端（ios android）插件注册，然后再处理后续操作，这样能保证代码运行正确。
     WidgetsFlutterBinding.ensureInitialized();
+    // 实例化存储类
+    await Storage().init();
     // Get.put 方式直接注入
     await Future.wait([
       Get.putAsync<ConfigService>(() async => await ConfigService().init())
