@@ -14,6 +14,7 @@ class StyleIndexPage extends GetView<StyleIndexController> {
         ListTile(
           onTap: () {
             controller.onTap();
+            ConfigService.to.switchThemeModel();
           },
           title: Text("语言${ConfigService.to.locale}"),
         )

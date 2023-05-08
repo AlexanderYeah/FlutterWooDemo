@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_woo_demo/common/style/index.dart';
 import 'package:flutter_woo_demo/global.dart';
 import 'package:get/get.dart';
 import 'common/i18n/index.dart';
@@ -17,9 +18,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primaryColor: Colors.blue,
-      ),
+      // 主题设置
+      theme: ConfigService.to.isDarkMode ? AppTheme.dark : AppTheme.light,
       initialRoute: "/style_index",
       getPages: RoutePages.list,
       navigatorObservers: [RoutePages.observer],
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       fallbackLocale: Translation.fallbackLocale, //默认语言
       locale: ConfigService.to.locale, // 当前语言种类
       supportedLocales: Translation.supportLocales, // 支持的语言种类
-      localizationsDelegates: Translation.localizationsDelegates, //
+      localizationsDelegates: Translation.localizationsDelegates, // 代理
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_woo_demo/common/index.dart';
+import 'package:flutter_woo_demo/common/style/index.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -20,6 +21,10 @@ class ConfigService extends GetxService {
 
   // 获取系统的地区
   Locale locale = PlatformDispatcher.instance.locale;
+  // 主题色
+  final RxBool _isDarkModel = Get.isDarkMode.obs;
+  bool get isDarkMode => _isDarkModel.value;
+
   //初始化
   Future<ConfigService> init() async {
     await getPlatform();
@@ -28,6 +33,38 @@ class ConfigService extends GetxService {
 
   Future<void> getPlatform() async {
     _platform = await PackageInfo.fromPlatform();
+  }
+
+  @override
+  void onReady() {
+    // TODO: implement onReady
+    super.onReady();
+    // 初始化语言设置
+    initLocale();
+    //初始化主题
+    initTheme();
+  }
+
+  // 切换主题
+  Future<void> switchThemeModel() async {
+    _isDarkModel.value = !_isDarkModel.value;
+    // 改变主题色
+    Get.changeTheme(
+      _isDarkModel.value == true ? AppTheme.dark : AppTheme.light,
+    );
+    // 存储本地
+    await Storage().setString(Constants.storageThemeCode,
+        _isDarkModel.value == true ? "dark" : "light");
+  }
+
+  // 初始化主题
+  void initTheme() {
+    var themeCode = Storage().getString(Constants.storageThemeCode);
+    _isDarkModel.value = themeCode == "dark" ? true : false;
+
+    Get.changeTheme(
+      _isDarkModel.value == true ? AppTheme.dark : AppTheme.light,
+    );
   }
 
   // 初始化语言
@@ -46,13 +83,5 @@ class ConfigService extends GetxService {
     locale = value;
     Get.updateLocale(value);
     Storage().setString(Constants.storageLanguageCode, value.languageCode);
-  }
-
-  @override
-  void onReady() {
-    // TODO: implement onReady
-    super.onReady();
-    // 初始化语言设置
-    initLocale();
   }
 }
