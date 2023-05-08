@@ -13,10 +13,8 @@ class StyleIndexPage extends GetView<StyleIndexController> {
     return Column(
       children: [
         ListTile(
-            leading: IconWidget.svg(
-              AssetsSvgs.cHomeSvg,
-              size: 30,
-            ),
+            leading: ImageWidget.url(
+                "https://ducafecat.oss-cn-beijing.aliyuncs.com/wp-content/uploads/2022/02/90bb74497f090c48e1df1ec1ca31fb11-450x450.jpg"),
             onTap: () {
               controller.onTap();
               ConfigService.to.switchThemeModel();

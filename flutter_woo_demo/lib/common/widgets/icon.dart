@@ -72,7 +72,8 @@ class IconWidget extends StatelessWidget {
   }) : super(key: key) {
     return;
   }
-
+  // 当需要定义一个有特别含义的构造函数的时候，
+  //可以通过命名构造 形式：构造函数.XXX来命名构造函数
   IconWidget.image(
     this.assetName, {
     Key? key,
