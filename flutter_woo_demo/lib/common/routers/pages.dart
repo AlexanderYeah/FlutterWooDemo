@@ -17,6 +17,8 @@ class RoutePages {
     // splash
     GetPage(name: '/splash', page: () => const SplashPage()),
     // welcome
-    GetPage(name: '/splash', page: () => const WelcomePage())
+    GetPage(name: '/splash', page: () => const WelcomePage()),
+    // style index
+    GetPage(name: '/style_index', page: () => const StyleIndexPage())
   ];
 }

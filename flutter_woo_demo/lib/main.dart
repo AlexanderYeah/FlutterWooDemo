@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_woo_demo/global.dart';
 import 'package:get/get.dart';
+import 'common/i18n/index.dart';
 import 'common/index.dart';
 
 // 保证service 正常的初始化
@@ -19,9 +20,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blue,
       ),
-      initialRoute: "/splash",
+      initialRoute: "/style_index",
       getPages: RoutePages.list,
       navigatorObservers: [RoutePages.observer],
+      // 语言设置
+      translations: Translation(), //词典,
+      fallbackLocale: Translation.fallbackLocale, //默认语言
+      locale: ConfigService.to.locale, // 当前语言种类
+      supportedLocales: Translation.supportLocales, // 支持的语言种类
+      localizationsDelegates: Translation.localizationsDelegates, //
     );
   }
 }
