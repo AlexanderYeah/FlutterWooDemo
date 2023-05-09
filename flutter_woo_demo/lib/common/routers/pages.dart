@@ -21,6 +21,8 @@ class RoutePages {
     GetPage(name: RouteNames.systemSplash, page: () => const SplashPage()),
     // welcome
     GetPage(name: RouteNames.systemWelcome, page: () => const WelcomePage()),
+    // register
+    GetPage(name: RouteNames.systemRegister, page: () => const RegisterPage()),
     // style index
     GetPage(name: '/style_index', page: () => const StyleIndexPage())
   ];

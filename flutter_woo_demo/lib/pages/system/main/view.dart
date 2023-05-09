@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_woo_demo/common/index.dart';
 import 'package:get/get.dart';
 
 import 'index.dart';
@@ -27,9 +28,7 @@ class _MainViewGetX extends GetView<MainController> {
 
   // 主视图
   Widget _buildView() {
-    return const Center(
-      child: Text("MainPage"),
-    );
+    return Text("data");
   }
 
   @override
