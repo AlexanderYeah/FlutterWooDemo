@@ -44,6 +44,8 @@ dependencies:
   badges: ^3.1.1
   extended_image: ^7.0.2
   flutter_screenutil: ^5.7.0
+  flutter_native_splash: ^2.2.16
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -57,6 +59,11 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   
   flutter_launcher_icons_maker: ^0.10.2
+
+# app 启动页
+flutter_native_splash:
+  color: "#ffffff"
+  image: "assets/icons/launcher_android.png"
 
 
 # app 图标

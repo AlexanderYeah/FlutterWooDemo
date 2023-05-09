@@ -15,9 +15,9 @@ class RoutePages {
     // 首页
     GetPage(name: '/', page: () => const MainPage(), binding: MainBinding()),
     // splash
-    GetPage(name: '/splash', page: () => const SplashPage()),
+    GetPage(name: RouteNames.systemSplash, page: () => const SplashPage()),
     // welcome
-    GetPage(name: '/splash', page: () => const WelcomePage()),
+    GetPage(name: RouteNames.systemWelcome, page: () => const WelcomePage()),
     // style index
     GetPage(name: '/style_index', page: () => const StyleIndexPage())
   ];

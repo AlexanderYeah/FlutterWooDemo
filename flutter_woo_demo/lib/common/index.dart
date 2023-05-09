@@ -8,3 +8,4 @@ export './style/index.dart';
 export './widgets/index.dart';
 export './i18n/index.dart';
 export './extension/index.dart';
+export './model/index.dart';

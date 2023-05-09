@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_woo_demo/common/services/config.dart';
+import 'package:flutter_woo_demo/common/index.dart';
 import 'package:get/get.dart';
 
 import 'index.dart';
@@ -9,7 +9,10 @@ class SplashPage extends GetView<SplashController> {
 
   // 主视图
   Widget _buildView() {
-    return Center(child: Text("版本号:${ConfigService.to.version}"));
+    return Image.asset(
+      AssetsImages.splashJpg,
+      fit: BoxFit.fill,
+    );
   }
 
   @override
@@ -18,12 +21,7 @@ class SplashPage extends GetView<SplashController> {
       init: SplashController(),
       id: "splash",
       builder: (_) {
-        return Scaffold(
-          appBar: AppBar(title: const Text("splash")),
-          body: SafeArea(
-            child: _buildView(),
-          ),
-        );
+        return _buildView();
       },
     );
   }
