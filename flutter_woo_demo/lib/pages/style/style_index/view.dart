@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_woo_demo/common/i18n/index.dart';
 import 'package:flutter_woo_demo/common/widgets/button.dart';
 import 'package:flutter_woo_demo/common/widgets/icon.dart';
+import 'package:flutter_woo_demo/common/widgets/input.dart';
 import 'package:get/get.dart';
 import 'package:flutter_woo_demo/common/index.dart';
 import 'index.dart';
@@ -13,11 +14,11 @@ class StyleIndexPage extends GetView<StyleIndexController> {
   Widget _buildView() {
     return Column(
       children: [
-        ButtonWidget.primary(
-          "主要的",
-          width: 70,
-          height: 40,
-          onTap: () {},
+        InputWidget.iconTextFilled(
+          Icon(
+            Icons.holiday_village,
+            color: Colors.redAccent,
+          ),
         ),
         ListTile(
             leading: ImageWidget.url(
