@@ -5,6 +5,7 @@ class WelcomeController extends GetxController {
   WelcomeController();
 
   List<WelcomeModel> items = [];
+  int currentIdx = 0;
   _initData() {
     update(["welcome"]);
     items = [
@@ -24,6 +25,11 @@ class WelcomeController extends GetxController {
         desc: LocaleKeys.welcomeThreeDesc.tr,
       ),
     ];
+  }
+
+  void onPageChanged(int index) {
+    currentIdx = index;
+    update(["slider", "bar"]);
   }
 
   void onTap() {}
