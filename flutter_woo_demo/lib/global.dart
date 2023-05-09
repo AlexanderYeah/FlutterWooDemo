@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'common/index.dart';
 
@@ -7,7 +8,9 @@ class Global {
     // WidgetFlutterBinding用于与Flutter引擎进行交互
     // WidgetsFlutterBinding.ensureInitialized();
     //这个表示先就行原生端（ios android）插件注册，然后再处理后续操作，这样能保证代码运行正确。
-    WidgetsFlutterBinding.ensureInitialized();
+    WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+
+    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
     // 实例化存储类
     await Storage().init();
     // 依赖注入 实例化网络请求工具
