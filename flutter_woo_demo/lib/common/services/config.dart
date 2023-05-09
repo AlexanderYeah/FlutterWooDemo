@@ -23,6 +23,8 @@ class ConfigService extends GetxService {
   // 主题色
   final RxBool _isDarkModel = Get.isDarkMode.obs;
   bool get isDarkMode => _isDarkModel.value;
+  // 是否已经打开过引导页
+  bool get isAlreadyOpen => Storage().getBool(Constants.storageAlreadyOpen);
 
   //初始化
   Future<ConfigService> init() async {
@@ -42,6 +44,11 @@ class ConfigService extends GetxService {
     initLocale();
     //初始化主题
     initTheme();
+  }
+
+  // 设置打开
+  void setAlreadyOpen() {
+    Storage().setBool(Constants.storageAlreadyOpen, true);
   }
 
   // 切换主题

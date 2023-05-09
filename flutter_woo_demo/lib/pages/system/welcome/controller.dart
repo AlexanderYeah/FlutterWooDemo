@@ -54,10 +54,11 @@ class WelcomeController extends GetxController {
   // void onInit() {
   //   super.onInit();
   // }
-
   @override
   void onReady() {
     super.onReady();
+    // 设置打开过引导页
+    ConfigService().setAlreadyOpen();
     _initData();
   }
 

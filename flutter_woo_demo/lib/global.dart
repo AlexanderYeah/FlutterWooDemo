@@ -15,10 +15,9 @@ class Global {
     await Storage().init();
     // 依赖注入 实例化网络请求工具
     Get.put<WPHttpService>(WPHttpService());
+    Get.put<ConfigService>(ConfigService());
+
     // Get.put 方式直接注入
-    await Future.wait([
-      Get.putAsync<ConfigService>(() async => await ConfigService().init())
-    ]).whenComplete(() {});
   }
 }
 

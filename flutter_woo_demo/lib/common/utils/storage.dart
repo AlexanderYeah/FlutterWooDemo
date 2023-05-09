@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 // 工厂方法构造函数:如果一个构造函数不总是返回一个新对象，
@@ -5,15 +7,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 // 可能从缓存中获取一个实例并返回，或者返回一个子类型的实例。
 // 使用单例本身目的在于创建一个唯一的对象，避免该对象可能会出现多头使用，造成数据冲突，还一个好处-----减少内存消耗。
 
+/// kv离线存储
 class Storage {
+  // 单例写法
   static final Storage _instance = Storage._internal();
   factory Storage() => _instance;
-  // 私有构造函数 初始化
+  late final SharedPreferences _prefs;
+
   Storage._internal();
 
-  late final SharedPreferences _prefs;
   Future<void> init() async {
     _prefs = await SharedPreferences.getInstance();
+  }
+
+  Future<bool> setJson(String key, Object value) async {
+    return await _prefs.setString(key, jsonEncode(value));
   }
 
   Future<bool> setString(String key, String value) async {
@@ -29,18 +37,17 @@ class Storage {
   }
 
   String getString(String key) {
-    return _prefs.getString(key) ?? "";
+    return _prefs.getString(key) ?? '';
   }
 
   bool getBool(String key) {
     return _prefs.getBool(key) ?? false;
   }
 
-  List getList(String key) {
+  List<String> getList(String key) {
     return _prefs.getStringList(key) ?? [];
   }
 
-  //删除
   Future<bool> remove(String key) async {
     return await _prefs.remove(key);
   }

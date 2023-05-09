@@ -7,4 +7,6 @@ class Constants {
 
   // 主题
   static const storageThemeCode = 'theme_code';
+  // 首次打开
+  static const storageAlreadyOpen = 'already_open';
 }

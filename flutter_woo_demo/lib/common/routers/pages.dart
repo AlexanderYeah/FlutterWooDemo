@@ -13,7 +13,10 @@ class RoutePages {
 
   static List<GetPage> list = [
     // 首页
-    GetPage(name: '/', page: () => const MainPage(), binding: MainBinding()),
+    GetPage(
+        name: RouteNames.main,
+        page: () => const MainPage(),
+        binding: MainBinding()),
     // splash
     GetPage(name: RouteNames.systemSplash, page: () => const SplashPage()),
     // welcome

@@ -1,5 +1,6 @@
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_woo_demo/common/routers/index.dart';
+import 'package:flutter_woo_demo/common/services/index.dart';
 import 'package:get/get.dart';
 
 class SplashController extends GetxController {
@@ -25,11 +26,12 @@ class SplashController extends GetxController {
   }
 
   _jumpToPage() {
-    // 欢迎页
-    Future.delayed(const Duration(seconds: 1), () {
-      // 表示跳到下一个页面,会关闭除它之外的所有页面。
+    // 如果已经打开过引导页 则不要再次打开
+    if (ConfigService.to.isAlreadyOpen) {
+      Get.offAllNamed(RouteNames.main);
+    } else {
       Get.offAllNamed(RouteNames.systemWelcome);
-    });
+    }
   }
 
   // @override
