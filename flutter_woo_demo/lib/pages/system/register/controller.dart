@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_woo_demo/common/routers/index.dart';
+import 'package:flutter_woo_demo/common/index.dart';
 import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
@@ -34,7 +34,13 @@ class RegisterController extends GetxController {
     if ((formKey.currentState as FormState).validate()) {
       // 验证通过提交数据
       // 跳转到验证码界面
-      Get.toNamed(RouteNames.systemRegisterPin);
+      Get.offNamed(RouteNames.systemRegisterPin,
+          arguments: UserRegisterReq(
+              username: usernameController.text,
+              email: emailController.text,
+              firstName: firstNameController.text,
+              lastName: lastnameController.text,
+              password: passwordController.text));
     }
     print("signup");
   }

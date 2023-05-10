@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_woo_demo/common/api/index.dart';
 import 'package:flutter_woo_demo/common/index.dart';
 import 'package:get/get.dart';
 
@@ -9,6 +10,9 @@ class RegisterPinController extends GetxController {
   TextEditingController pinController = TextEditingController();
   // 表单key
   GlobalKey formKey = GlobalKey<FormState>();
+
+  // 接受传值
+  UserRegisterReq? req = Get.arguments;
 
   _initData() {
     update(["register_pin"]);
@@ -21,8 +25,26 @@ class RegisterPinController extends GetxController {
 
   // 按钮提交
   void onBtnSubmit() {
-    print("object");
-    Loading.success("111");
+    // 注册
+    _register();
+  }
+
+  // 发送注册请求
+  Future<void> _register() async {
+    try {
+      Loading.show();
+      // bool isOk = await UserApi.register(req!);
+      // if (isOk) {
+      //   Loading.success(
+      //       LocaleKeys.commonMessageSuccess.trParams({"method": "Resgiter"}));
+      //   Get.back(result: true);
+      // }
+      Loading.success(
+          LocaleKeys.commonMessageSuccess.trParams({"method": "Resgiter"}));
+      Get.back(result: true);
+    } finally {
+      Loading.dismiss();
+    }
   }
 
   // 按钮返回
