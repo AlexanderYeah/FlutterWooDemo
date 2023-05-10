@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -102,6 +103,10 @@ class RequestInterceptors extends Interceptor {
     }
   }
 
+  // Future<Void> _errorNoAuthLogout() async {
+
+  // }
+
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
     // TODO: implement onError
@@ -111,8 +116,20 @@ class RequestInterceptors extends Interceptor {
       case DioErrorType.badResponse: //服务器自定义错误的处理
         {
           final response = err.response;
-          final errorMsg = "";
-          // todo:
+          final errorMsg = ErrorMessageModel.fromJson(response?.data);
+          switch (errorMsg.statusCode) {
+            case 401:
+              // 未授权 重新登录
+              break;
+            case 404:
+              break;
+            case 502:
+              break;
+            case 500:
+              break;
+            default:
+          }
+          Loading.error(errorMsg.message);
         }
         break;
       case DioErrorType.cancel:

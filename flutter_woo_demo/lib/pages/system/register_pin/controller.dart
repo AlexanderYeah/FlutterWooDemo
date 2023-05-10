@@ -33,15 +33,15 @@ class RegisterPinController extends GetxController {
   Future<void> _register() async {
     try {
       Loading.show();
-      // bool isOk = await UserApi.register(req!);
-      // if (isOk) {
-      //   Loading.success(
-      //       LocaleKeys.commonMessageSuccess.trParams({"method": "Resgiter"}));
-      //   Get.back(result: true);
-      // }
-      Loading.success(
-          LocaleKeys.commonMessageSuccess.trParams({"method": "Resgiter"}));
-      Get.back(result: true);
+      bool isOk = await UserApi.register(req!);
+      if (isOk) {
+        Loading.success(
+            LocaleKeys.commonMessageSuccess.trParams({"method": "Resgiter"}));
+        Get.back(result: true);
+      }
+      // Loading.success(
+      //     LocaleKeys.commonMessageSuccess.trParams({"method": "Resgiter"}));
+      // Get.back(result: true);
     } finally {
       Loading.dismiss();
     }
