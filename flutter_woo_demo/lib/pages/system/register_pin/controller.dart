@@ -22,6 +22,7 @@ class RegisterPinController extends GetxController {
   // 按钮提交
   void onBtnSubmit() {
     print("object");
+    Loading.success("111");
   }
 
   // 按钮返回

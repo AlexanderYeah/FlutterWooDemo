@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'common/i18n/index.dart';
 import 'common/index.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 // 保证service 正常的初始化
 Future<void> main() async {
@@ -39,9 +40,10 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           // 1倍的子宽
           builder: (context, child) {
+            child = EasyLoading.init()(context, child);
             return MediaQuery(
                 data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                child: child!);
+                child: child);
           },
         );
       },

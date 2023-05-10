@@ -13,6 +13,8 @@ class Global {
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
     // 实例化存储类
     await Storage().init();
+    // 初始化
+    Loading();
     // 依赖注入 实例化网络请求工具
     Get.put<WPHttpService>(WPHttpService());
     Get.put<ConfigService>(ConfigService());
