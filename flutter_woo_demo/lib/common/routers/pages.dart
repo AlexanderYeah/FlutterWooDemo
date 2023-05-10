@@ -23,6 +23,10 @@ class RoutePages {
     GetPage(name: RouteNames.systemWelcome, page: () => const WelcomePage()),
     // register
     GetPage(name: RouteNames.systemRegister, page: () => const RegisterPage()),
+    // register_pin
+    GetPage(
+        name: RouteNames.systemRegisterPin,
+        page: () => const RegisterPinPage()),
     // style index
     GetPage(name: '/style_index', page: () => const StyleIndexPage())
   ];
