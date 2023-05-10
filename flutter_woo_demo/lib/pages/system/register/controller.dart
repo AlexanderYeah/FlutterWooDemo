@@ -47,7 +47,7 @@ class RegisterController extends GetxController {
 
   // 登录
   void onLogin() {
-    print("login");
+    Get.toNamed(RouteNames.systemLogin);
   }
 
   void onTap() {}

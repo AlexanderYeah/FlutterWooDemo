@@ -27,6 +27,8 @@ class RoutePages {
     GetPage(
         name: RouteNames.systemRegisterPin,
         page: () => const RegisterPinPage()),
+    // login
+    GetPage(name: RouteNames.systemLogin, page: () => const LoginPage()),
     // style index
     GetPage(name: '/style_index', page: () => const StyleIndexPage())
   ];
