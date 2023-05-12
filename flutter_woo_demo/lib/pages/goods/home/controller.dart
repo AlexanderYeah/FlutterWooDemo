@@ -7,6 +7,9 @@ class HomeController extends GetxController {
     update(["home"]);
   }
 
+  //  标题栏的点击
+  void onTapAppBar() {}
+
   void onTap() {}
 
   // @override
