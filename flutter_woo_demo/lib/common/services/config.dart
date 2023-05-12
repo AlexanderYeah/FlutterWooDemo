@@ -67,7 +67,6 @@ class ConfigService extends GetxService {
   void initTheme() {
     var themeCode = Storage().getString(Constants.storageThemeCode);
     _isDarkModel.value = themeCode == "dark" ? true : false;
-
     Get.changeTheme(
       _isDarkModel.value == true ? AppTheme.dark : AppTheme.light,
     );

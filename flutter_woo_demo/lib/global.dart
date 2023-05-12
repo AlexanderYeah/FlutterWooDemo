@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_woo_demo/common/services/user.dart';
 import 'package:get/get.dart';
 import 'common/index.dart';
 
@@ -18,6 +19,7 @@ class Global {
     // 依赖注入 实例化网络请求工具
     Get.put<WPHttpService>(WPHttpService());
     Get.put<ConfigService>(ConfigService());
+    Get.put<UserService>(UserService());
 
     // Get.put 方式直接注入
   }

@@ -2,6 +2,7 @@ import 'dart:ffi';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_woo_demo/common/services/user.dart';
 import 'package:get/get.dart'
     hide Response, FormData, MultipartFile; // 这里要隐藏 否则dio 的会冲突
 import '../index.dart';
@@ -81,6 +82,9 @@ class RequestInterceptors extends Interceptor {
   // 拦截请求
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    if (UserService.to.hasToken) {
+      options.headers["Authorization"] = 'Bearer ${UserService.to.token}';
+    }
     // TODO: implement onRequest
     return handler.next(options);
   }

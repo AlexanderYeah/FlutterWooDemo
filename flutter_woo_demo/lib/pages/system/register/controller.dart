@@ -10,19 +10,19 @@ class RegisterController extends GetxController {
 
   // 用户名
   TextEditingController usernameController =
-      TextEditingController(text: "leonardo");
+      TextEditingController(text: "yskysk");
   // 邮件
   TextEditingController emailController =
-      TextEditingController(text: "1023954998@qq.com");
+      TextEditingController(text: "1023954991@qq.com");
   // 姓
   TextEditingController firstNameController =
-      TextEditingController(text: "leonardo");
+      TextEditingController(text: "yskysk");
   //名
   TextEditingController lastnameController =
-      TextEditingController(text: "fibonacci");
+      TextEditingController(text: "yskysk");
   // 密码
   TextEditingController passwordController =
-      TextEditingController(text: "12345678");
+      TextEditingController(text: "qwer1234");
 
   _initData() {
     update(["register"]);
@@ -32,15 +32,16 @@ class RegisterController extends GetxController {
   void onSignUp() {
     // 验证表单
     if ((formKey.currentState as FormState).validate()) {
+      var password = EncryptUtil().aesEncode(passwordController.text);
       // 验证通过提交数据
       // 跳转到验证码界面
-      Get.offNamed(RouteNames.systemRegisterPin,
+      Get.toNamed(RouteNames.systemRegisterPin,
           arguments: UserRegisterReq(
               username: usernameController.text,
               email: emailController.text,
               firstName: firstNameController.text,
               lastName: lastnameController.text,
-              password: passwordController.text));
+              password: password));
     }
     print("signup");
   }

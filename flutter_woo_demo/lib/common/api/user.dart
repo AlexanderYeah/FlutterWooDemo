@@ -9,4 +9,16 @@ class UserApi {
     }
     return false;
   }
+
+  //登录
+  static Future<UserTokenModel> login(UserLoginReq req) async {
+    var res = await WPHttpService.to.post('/users/login', data: req);
+    return UserTokenModel.fromJson(res.data);
+  }
+
+  // profile
+  static Future<UserProfileModel> profile() async {
+    var res = await WPHttpService.to.get('/users/me');
+    return UserProfileModel.fromJson(res.data);
+  }
 }
