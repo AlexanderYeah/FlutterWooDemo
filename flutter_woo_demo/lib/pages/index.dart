@@ -8,3 +8,6 @@ export './system/welcome/index.dart';
 export './system/register/index.dart';
 export './system/register_pin/index.dart';
 export './system/login/index.dart';
+export './cart/cart_index/index.dart';
+export './my/my_index/index.dart';
+export './goods/home/index.dart';

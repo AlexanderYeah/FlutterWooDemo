@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_woo_demo/common/routers/index.dart';
+import 'package:flutter_woo_demo/main.dart';
 import 'package:flutter_woo_demo/pages/system/main/binds.dart';
 
 import '../../pages/index.dart';
@@ -29,6 +30,15 @@ class RoutePages {
         page: () => const RegisterPinPage()),
     // login
     GetPage(name: RouteNames.systemLogin, page: () => const LoginPage()),
+    // cart Index
+    GetPage(name: RouteNames.cartCartIndex, page: () => const CartIndexPage()),
+    // msg Index
+    GetPage(name: RouteNames.cartCartIndex, page: () => const CartIndexPage()),
+    // My_index
+    GetPage(name: RouteNames.myMyIndex, page: () => const MyIndexPage()),
+    // Goods Home
+    GetPage(name: RouteNames.goodsHome, page: () => const HomePage()),
+
     // style index
     GetPage(name: '/style_index', page: () => const StyleIndexPage())
   ];

@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 
-class GoodsController extends GetxController {
-  GoodsController();
+class MyIndexController extends GetxController {
+  MyIndexController();
 
   _initData() {
-    update(["goods"]);
+    update(["my_index"]);
   }
 
   void onTap() {}

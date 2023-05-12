@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_woo_demo/common/index.dart';
+import 'package:flutter_woo_demo/pages/index.dart';
 import 'package:get/get.dart';
 
 import 'index.dart';
@@ -43,14 +44,10 @@ class _MainViewGetX extends GetView<MainController> {
             controller: controller.pageController,
             onPageChanged: controller.onIndexChange,
             children: const [
-              Center(
-                child: Text(
-                  "1",
-                ),
-              ),
-              Center(child: Text("2")),
-              Center(child: Text("3")),
-              Center(child: Text("4")),
+              HomePage(),
+              CartIndexPage(),
+              CartIndexPage(),
+              MyIndexPage()
             ],
           ),
           // 返回自定义的底部导航栏

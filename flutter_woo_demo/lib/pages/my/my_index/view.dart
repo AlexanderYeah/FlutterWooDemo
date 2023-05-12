@@ -3,24 +3,24 @@ import 'package:get/get.dart';
 
 import 'index.dart';
 
-class GoodsPage extends GetView<GoodsController> {
-  const GoodsPage({Key? key}) : super(key: key);
+class MyIndexPage extends GetView<MyIndexController> {
+  const MyIndexPage({Key? key}) : super(key: key);
 
   // 主视图
   Widget _buildView() {
     return const Center(
-      child: Text("GoodsPage"),
+      child: Text("MyIndexPage"),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<GoodsController>(
-      init: GoodsController(),
-      id: "goods",
+    return GetBuilder<MyIndexController>(
+      init: MyIndexController(),
+      id: "my_index",
       builder: (_) {
         return Scaffold(
-          appBar: AppBar(title: const Text("goods")),
+          appBar: AppBar(title: const Text("my_index")),
           body: SafeArea(
             child: _buildView(),
           ),
