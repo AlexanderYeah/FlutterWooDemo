@@ -107,9 +107,10 @@ class RequestInterceptors extends Interceptor {
     }
   }
 
-  // Future<Void> _errorNoAuthLogout() async {
-
-  // }
+  Future<void> _errorNoAuthLogout() async {
+    await UserService.to.logout();
+    Get.toNamed(RouteNames.systemLogin);
+  }
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
@@ -123,7 +124,8 @@ class RequestInterceptors extends Interceptor {
           final errorMsg = ErrorMessageModel.fromJson(response?.data);
           switch (errorMsg.statusCode) {
             case 401:
-              // 未授权 重新登录
+              _errorNoAuthLogout();
+              // 未授权 token 失效 重新登录
               break;
             case 404:
               break;
