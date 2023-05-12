@@ -1,9 +1,22 @@
+import 'package:flutter_woo_demo/common/api/index.dart';
+import 'package:flutter_woo_demo/common/model/index.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   HomeController();
 
-  _initData() {
+  // 轮播图数据
+  int bannerCurrentIndex = 0;
+  // banner 数据
+  List<KeyValueModel> bannerItems = [];
+  // banner切换事件
+  void onChangeBanner(int index, reason) {
+    bannerCurrentIndex = index;
+    update(["home_banner"]);
+  }
+
+  _initData() async {
+    bannerItems = await SystemApi.banners();
     update(["home"]);
   }
 

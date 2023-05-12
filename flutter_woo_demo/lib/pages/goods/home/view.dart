@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_woo_demo/common/components/carousel.dart';
 import 'package:flutter_woo_demo/common/index.dart';
 import 'package:get/get.dart';
 
@@ -80,9 +82,22 @@ class HomePage extends GetView<HomeController> {
 
   // 轮播广告
   Widget _buildBanner() {
-    return Container()
+    return GetBuilder(
+      id: "home_banner",
+      init: controller,
+      builder: (_) {
+        return CarouselWidget(
+          items: controller.bannerItems,
+          currentIndex: controller.bannerCurrentIndex,
+          onPageChanged: controller.onChangeBanner,
+          height: 190.w,
+        );
+      },
+    )
+        .clipRRect(all: AppSpace.button)
         .sliverToBoxAdapter()
         .sliverPaddingHorizontal(AppSpace.page);
+    // .clipRRect(all: AppSpace.button);
   }
 
   // 分类导航
