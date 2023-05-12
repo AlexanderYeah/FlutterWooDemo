@@ -28,7 +28,7 @@ class SplashController extends GetxController {
   _jumpToPage() {
     // 如果已经打开过引导页 则不要再次打开
     if (ConfigService.to.isAlreadyOpen) {
-      Get.offAllNamed(RouteNames.systemRegister);
+      Get.offAllNamed(RouteNames.main);
     } else {
       Get.offAllNamed(RouteNames.systemWelcome);
     }

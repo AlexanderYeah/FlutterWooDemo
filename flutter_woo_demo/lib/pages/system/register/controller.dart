@@ -35,7 +35,7 @@ class RegisterController extends GetxController {
       var password = EncryptUtil().aesEncode(passwordController.text);
       // 验证通过提交数据
       // 跳转到验证码界面
-      Get.toNamed(RouteNames.systemRegisterPin,
+      Get.offNamed(RouteNames.systemRegisterPin,
           arguments: UserRegisterReq(
               username: usernameController.text,
               email: emailController.text,

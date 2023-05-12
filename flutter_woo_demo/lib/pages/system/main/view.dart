@@ -38,9 +38,50 @@ class _MainViewGetX extends GetView<MainController> {
       id: "main",
       builder: (_) {
         return Scaffold(
-          appBar: AppBar(title: const Text("main")),
-          body: SafeArea(
-            child: _buildView(),
+          body: PageView(
+            physics: const NeverScrollableScrollPhysics(),
+            controller: controller.pageController,
+            onPageChanged: controller.onIndexChange,
+            children: const [
+              Center(
+                child: Text(
+                  "1",
+                ),
+              ),
+              Center(child: Text("2")),
+              Center(child: Text("3")),
+              Center(child: Text("4")),
+            ],
+          ),
+          // 返回自定义的底部导航栏
+          bottomNavigationBar: GetBuilder<MainController>(
+            id: "navigation",
+            builder: (controller) {
+              return BuildNavigation(
+                currentIndex: controller.currentIdx,
+                items: [
+                  NavigationItemModel(
+                    label: LocaleKeys.tabBarHome.tr,
+                    icon: AssetsSvgs.navHomeSvg,
+                  ),
+                  NavigationItemModel(
+                    label: LocaleKeys.tabBarCart.tr,
+                    icon: AssetsSvgs.navCartSvg,
+                    count: 3,
+                  ),
+                  NavigationItemModel(
+                    label: LocaleKeys.tabBarMessage.tr,
+                    icon: AssetsSvgs.navMessageSvg,
+                    count: 9,
+                  ),
+                  NavigationItemModel(
+                    label: LocaleKeys.tabBarProfile.tr,
+                    icon: AssetsSvgs.navProfileSvg,
+                  ),
+                ],
+                onTap: controller.onJumpToTap,
+              );
+            },
           ),
         );
       },
