@@ -10,6 +10,7 @@ class MainController extends GetxController {
   final PageController pageController = PageController();
   // 当前的索引
   int currentIdx = 0;
+
   // 导航栏切换
   void onIndexChange(int index) {
     currentIdx = index;

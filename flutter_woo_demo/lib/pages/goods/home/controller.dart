@@ -1,5 +1,6 @@
 import 'package:flutter_woo_demo/common/api/index.dart';
 import 'package:flutter_woo_demo/common/model/index.dart';
+import 'package:flutter_woo_demo/common/model/request/product.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -9,6 +10,13 @@ class HomeController extends GetxController {
   int bannerCurrentIndex = 0;
   // banner 数据
   List<KeyValueModel> bannerItems = [];
+  // 分类导航数据
+  List<CategoryModel> catogoryItems = [];
+  // 推荐商品列表数据
+  List<ProductModel> flashShellProductList = [];
+  // 最新商品列表数据
+  List<ProductModel> newProductProductList = [];
+
   // banner切换事件
   void onChangeBanner(int index, reason) {
     bannerCurrentIndex = index;
@@ -17,6 +25,10 @@ class HomeController extends GetxController {
 
   _initData() async {
     bannerItems = await SystemApi.banners();
+    catogoryItems = await ProductApi.catogroies();
+    flashShellProductList =
+        await ProductApi.products(ProductsReq(featured: true));
+    newProductProductList = await ProductApi.products(ProductsReq());
     update(["home"]);
   }
 
