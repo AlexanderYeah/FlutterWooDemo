@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter_woo_demo/common/api/index.dart';
+import 'package:flutter_woo_demo/common/index.dart';
 import 'package:flutter_woo_demo/common/model/index.dart';
 import 'package:flutter_woo_demo/common/model/request/product.dart';
 import 'package:get/get.dart';
@@ -102,8 +105,13 @@ class HomeController extends GetxController {
     flashShellProductList =
         await ProductApi.products(ProductsReq(featured: true));
     print(flashShellProductList.length);
+    // 第一次获取完数据之后缓存到本地
+    Storage().setJson(Constants.storageHomeBanner, bannerItems);
+    Storage().setJson(Constants.storageHomeCategories, catogoryItems);
+    Storage().setJson(Constants.storageHomeFlashSell, flashShellProductList);
+    Storage().setJson(Constants.storageHomeNewSell, newProductProductList);
     // 显示占位图
-    // await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     update(["home"]);
   }
 
@@ -112,10 +120,12 @@ class HomeController extends GetxController {
 
   void onTap() {}
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  // }
+  @override
+  // onInit 先于 onReady 执行
+  void onInit() {
+    super.onInit();
+    _loadCacheData();
+  }
 
   @override
   void onReady() {
@@ -127,5 +137,37 @@ class HomeController extends GetxController {
   void onClose() {
     super.onClose();
     refreshController.dispose();
+  }
+
+  // 载入缓存的方法
+  Future<void> _loadCacheData() async {
+    var stringBanner = Storage().getString(Constants.storageHomeBanner);
+    var stringCatogories = Storage().getString(Constants.storageHomeCategories);
+    var stringFlashShell = Storage().getString(Constants.storageHomeFlashSell);
+    var stringNewShell = Storage().getString(Constants.storageHomeNewSell);
+    bannerItems = stringBanner != ""
+        ? jsonDecode(stringBanner).map<KeyValueModel>((item) {
+            return KeyValueModel.fromJson(item);
+          }).toList()
+        : [];
+    catogoryItems = stringCatogories != ""
+        ? jsonDecode(stringCatogories).map<CategoryModel>((item) {
+            return CategoryModel.fromJson(item);
+          }).toList()
+        : [];
+    flashShellProductList = stringFlashShell != ""
+        ? jsonDecode(stringFlashShell).map<ProductModel>((item) {
+            return ProductModel.fromJson(item);
+          }).toList()
+        : [];
+    newProductProductList = stringNewShell != ""
+        ? jsonDecode(stringNewShell).map<ProductModel>((item) {
+            return ProductModel.fromJson(item);
+          }).toList()
+        : [];
+    if (bannerItems.isNotEmpty ||
+        catogoryItems.isNotEmpty ||
+        flashShellProductList.isNotEmpty ||
+        newProductProductList.isNotEmpty) update(["home"]);
   }
 }

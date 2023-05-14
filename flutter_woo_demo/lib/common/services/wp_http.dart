@@ -30,7 +30,7 @@ class WPHttpService extends GetxService {
     _dio = Dio(options);
     // 拦截器
     _dio.interceptors.add(RequestInterceptors());
-    _dio.interceptors.add(LogInterceptor());
+    // _dio.interceptors.add(LogInterceptor());
   }
 
   // get 请求
