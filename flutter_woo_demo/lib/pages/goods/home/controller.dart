@@ -96,7 +96,9 @@ class HomeController extends GetxController {
   }
 
   // 全部的点击事件
-  void onAllTap(bool featured) {}
+  void onAllTap(bool featured) {
+    Get.toNamed(RouteNames.goodsProductList, arguments: {"featured": featured});
+  }
 
   _initData() async {
     bannerItems = await SystemApi.banners();

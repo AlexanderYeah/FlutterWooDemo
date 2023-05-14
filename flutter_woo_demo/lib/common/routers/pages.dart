@@ -38,7 +38,9 @@ class RoutePages {
     GetPage(name: RouteNames.myMyIndex, page: () => const MyIndexPage()),
     // Goods Home
     GetPage(name: RouteNames.goodsHome, page: () => const HomePage()),
-
+    // Product List
+    GetPage(
+        name: RouteNames.goodsProductList, page: () => const ProductListPage()),
     // style index
     GetPage(name: '/style_index', page: () => const StyleIndexPage())
   ];
