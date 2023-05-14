@@ -11,35 +11,41 @@ class HomePage extends GetView<HomeController> {
   const HomePage({Key? key}) : super(key: key);
   // 主视图
   Widget _buildView() {
-    return CustomScrollView(
-      slivers: <Widget>[
-        // 轮播广告
-        _buildBanner(),
-        // 分类导航
-        _buildCatogory(),
+    return controller.flashShellProductList.isEmpty ||
+            controller.newProductProductList.isEmpty
+        ? const PlaceholdWidget()
+        : CustomScrollView(
+            slivers: <Widget>[
+              // 轮播广告
+              _buildBanner(),
+              // 分类导航
+              _buildCatogory(),
+              // title
+              controller.flashShellProductList.isNotEmpty
+                  ? BuildListTitle(
+                      title: LocaleKeys.gHomeFlashSell.tr,
+                      subTitle: "03.30.30",
+                      onTap: () => controller.onAllTap(true),
+                    )
+                      .sliverToBoxAdapter()
+                      .sliverPaddingHorizontal(AppSpace.page)
+                  : const SliverToBoxAdapter(),
 
-        // title
-        controller.flashShellProductList.isNotEmpty
-            ? BuildListTitle(
-                title: LocaleKeys.gHomeFlashSell.tr,
-                subTitle: "03.30.30",
-                onTap: () => controller.onAllTap(true),
-              ).sliverToBoxAdapter().sliverPaddingHorizontal(AppSpace.page)
-            : const SliverToBoxAdapter(),
-
-        // list
-        _buildFlashShell(),
-        // title
-        controller.newProductProductList.isNotEmpty
-            ? BuildListTitle(
-                title: LocaleKeys.gHomeNewProduct.tr,
-                onTap: () => controller.onAllTap(false),
-              ).sliverToBoxAdapter().sliverPaddingHorizontal(AppSpace.page)
-            : const SliverToBoxAdapter(),
-        // list
-        _buildNewShell(),
-      ],
-    );
+              // list
+              _buildFlashShell(),
+              // title
+              controller.newProductProductList.isNotEmpty
+                  ? BuildListTitle(
+                      title: LocaleKeys.gHomeNewProduct.tr,
+                      onTap: () => controller.onAllTap(false),
+                    )
+                      .sliverToBoxAdapter()
+                      .sliverPaddingHorizontal(AppSpace.page)
+                  : const SliverToBoxAdapter(),
+              // list
+              _buildNewShell(),
+            ],
+          );
   }
 
   @override

@@ -102,7 +102,8 @@ class HomeController extends GetxController {
     flashShellProductList =
         await ProductApi.products(ProductsReq(featured: true));
     print(flashShellProductList.length);
-
+    // 显示占位图
+    // await Future.delayed(const Duration(seconds: 1));
     update(["home"]);
   }
 
