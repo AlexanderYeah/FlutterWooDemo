@@ -41,6 +41,8 @@ class RoutePages {
     // Product List
     GetPage(
         name: RouteNames.goodsProductList, page: () => const ProductListPage()),
+    // Category
+    GetPage(name: RouteNames.goodsCategory, page: () => const CategoryPage()),
     // style index
     GetPage(name: '/style_index', page: () => const StyleIndexPage())
   ];

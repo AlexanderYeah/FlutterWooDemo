@@ -12,3 +12,4 @@ export './cart/cart_index/index.dart';
 export './my/my_index/index.dart';
 export './goods/home/index.dart';
 export './goods/product_list/index.dart';
+export './goods/category/index.dart';

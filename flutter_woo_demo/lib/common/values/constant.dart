@@ -22,4 +22,6 @@ class Constants {
   static const storageHomeCategories = 'home_categories';
   static const storageHomeFlashSell = 'home_flash_sell';
   static const storageHomeNewSell = 'home_new_sell';
+
+  static const storageProductsCategories = 'home_categories';
 }

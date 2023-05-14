@@ -125,7 +125,10 @@ class HomePage extends GetView<HomeController> {
   Widget _buildCatogory() {
     return <Widget>[
       for (var i = 0; i < controller.catogoryItems.length; i++)
-        CategoryListItemWidget(category: controller.catogoryItems[i])
+        CategoryListItemWidget(
+          category: controller.catogoryItems[i],
+          onTap: controller.onCategoryTap,
+        )
     ]
         .toListView(
           scrollDirection: Axis.horizontal,

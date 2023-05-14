@@ -86,7 +86,7 @@ class HomeController extends GetxController {
 
   // 分类点击事件
   void onCategoryTap(int categoryId) {
-    print(categoryId);
+    Get.toNamed(RouteNames.goodsCategory, arguments: {"id": categoryId});
   }
 
   // banner切换事件
@@ -112,6 +112,7 @@ class HomeController extends GetxController {
     Storage().setJson(Constants.storageHomeCategories, catogoryItems);
     Storage().setJson(Constants.storageHomeFlashSell, flashShellProductList);
     Storage().setJson(Constants.storageHomeNewSell, newProductProductList);
+    Storage().setJson(Constants.storageProductsCategories, catogoryItems);
     // 显示占位图
     await Future.delayed(const Duration(seconds: 1));
     update(["home"]);
