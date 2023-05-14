@@ -3,18 +3,34 @@ import 'package:flutter_woo_demo/common/model/request/product.dart';
 import '../index.dart';
 
 class ProductApi {
+  /// 分类列表
+  static Future<List<CategoryModel>> categories2() async {
+    var res = await WPHttpService.to.get(
+      '/products/categories',
+    );
+
+    List<CategoryModel> categories = [];
+    for (var item in res.data) {
+      categories.add(CategoryModel.fromJson(item));
+    }
+    // 排序 menuOrder , 小号在前
+    categories.sort((a, b) => a.menuOrder!.compareTo(b.menuOrder as int));
+    return categories;
+  }
+
   // 分类列表
   static Future<List<CategoryModel>> catogroies() async {
     var res = await WPHttpService.to.get(
-      '/product/categories',
+      '/products/categories',
     );
-    List<CategoryModel> categorys = [];
+    //
+    List<CategoryModel> categories = [];
     for (var item in res.data) {
-      categorys.add(CategoryModel.fromJson(item));
+      categories.add(CategoryModel.fromJson(item));
     }
     // 排序 menuOrder 小号在前
-    categorys.sort(((a, b) => a.menuOrder!.compareTo(b.menuOrder as int)));
-    return categorys;
+    categories.sort((a, b) => a.menuOrder!.compareTo(b.menuOrder as int));
+    return categories;
   }
 
   // 商品列表

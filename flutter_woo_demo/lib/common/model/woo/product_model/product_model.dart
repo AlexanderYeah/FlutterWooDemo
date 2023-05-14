@@ -227,7 +227,8 @@ class ProductModel {
       groupedProducts: json['grouped_products'] as List<dynamic>?,
       menuOrder: json['menu_order'] as int?,
       priceHtml: json['price_html'] as String?,
-      relatedIds: json['related_ids'] as List<int>?,
+      // relatedIds: json['related_ids'] as List<int>?,
+      relatedIds: json['related_ids']?.cast<int>(),
       metaData: (json['meta_data'] as List<dynamic>?)
           ?.map((e) => MetaDatum.fromJson(e as Map<String, dynamic>))
           .toList(),

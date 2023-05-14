@@ -27,7 +27,8 @@ class Attribute {
       position: json['position'] as int?,
       visible: json['visible'] as bool?,
       variation: json['variation'] as bool?,
-      options: json['options'] as List<String>?,
+      // options: json['options'] as List<String>?,
+      options: json['options']?.cast<String>(),
     );
   }
 

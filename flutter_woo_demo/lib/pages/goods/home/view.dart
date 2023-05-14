@@ -102,7 +102,15 @@ class HomePage extends GetView<HomeController> {
 
   // 分类导航
   Widget _buildCatogory() {
-    return Container()
+    return <Widget>[
+      for (var i = 0; i < controller.catogoryItems.length; i++)
+        CategoryListItemWidget(category: controller.catogoryItems[i])
+    ]
+        .toListView(
+          scrollDirection: Axis.horizontal,
+        )
+        .height(90.w)
+        .paddingVertical(AppSpace.listRow)
         .sliverToBoxAdapter()
         .sliverPaddingHorizontal(AppSpace.page);
   }
