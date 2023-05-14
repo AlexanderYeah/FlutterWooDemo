@@ -16,10 +16,16 @@ class HomePage extends GetView<HomeController> {
         _buildBanner(),
         // 分类导航
         _buildCatogory(),
+
         // title
-        Text(LocaleKeys.gHomeFlashSell.tr)
-            .sliverToBoxAdapter()
-            .sliverPaddingHorizontal(AppSpace.page),
+        controller.flashShellProductList.isNotEmpty
+            ? BuildListTitle(
+                title: LocaleKeys.gHomeFlashSell.tr,
+                subTitle: "03.30.30",
+                onTap: () => controller.onAllTap(true),
+              ).sliverToBoxAdapter().sliverPaddingHorizontal(AppSpace.page)
+            : const SliverToBoxAdapter(),
+
         // list
         _buildFlashShell(),
         // title
@@ -115,16 +121,28 @@ class HomePage extends GetView<HomeController> {
         .sliverPaddingHorizontal(AppSpace.page);
   }
 
-  // 分类Flash Shell
-  Widget _buildFlashShell() {
+  // 分类New Shell
+  Widget _buildNewShell() {
     return Container()
         .sliverToBoxAdapter()
         .sliverPaddingHorizontal(AppSpace.page);
   }
 
-  // 分类New Shell
-  Widget _buildNewShell() {
-    return Container()
+  // 分类Flash Shell
+  Widget _buildFlashShell() {
+    return <Widget>[
+      for (var i = 0; i < controller.flashShellProductList.length; i++)
+        ProductItemWidget(
+          controller.flashShellProductList[i],
+          imgWidth: 117.w,
+          imgHeight: 120.w,
+        )
+            .constrained(width: 120.w, height: 170.w)
+            .paddingRight(AppSpace.listItem)
+    ]
+        .toListView(scrollDirection: Axis.horizontal)
+        .height(170.w)
+        .paddingBottom(AppSpace.listRow)
         .sliverToBoxAdapter()
         .sliverPaddingHorizontal(AppSpace.page);
   }

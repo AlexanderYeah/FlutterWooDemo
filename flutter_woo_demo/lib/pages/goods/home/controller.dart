@@ -30,6 +30,9 @@ class HomeController extends GetxController {
     update(["home_banner"]);
   }
 
+  // 全部的点击事件
+  void onAllTap(bool featured) {}
+
   _initData() async {
     bannerItems = await SystemApi.banners();
     catogoryItems = await ProductApi.catogroies();
