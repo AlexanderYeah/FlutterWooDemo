@@ -1,9 +1,8 @@
 import 'package:flutter_woo_demo/common/api/index.dart';
 import 'package:flutter_woo_demo/common/model/index.dart';
 import 'package:flutter_woo_demo/common/model/request/product.dart';
-import 'package:flutter_woo_demo/common/services/index.dart';
-import 'package:flutter_woo_demo/common/services/user.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomeController extends GetxController {
   HomeController();
@@ -18,6 +17,69 @@ class HomeController extends GetxController {
   List<ProductModel> flashShellProductList = [];
   // 最新商品列表数据
   List<ProductModel> newProductProductList = [];
+
+  // 刷新控制器
+  final RefreshController refreshController =
+      RefreshController(initialRefresh: true);
+  // 页码
+  int _page = 1;
+  // 页尺寸
+  final int _limit = 20;
+
+  // 拉去数据
+  Future<bool> _loadNewsSell(bool isRefresh) async {
+    //拉取数据
+    var result = await ProductApi.products(
+        ProductsReq(prePage: _limit, page: isRefresh ? 1 : _page));
+    // 下拉刷新
+    if (isRefresh) {
+      // 充值数据
+      _page = 1;
+      newProductProductList.clear();
+    }
+    // 有数据
+    if (result.isNotEmpty == true) {
+      // 页数+！
+      _page++;
+      // 添加数据
+      newProductProductList.addAll(result);
+    }
+    // 是否空
+    return result.isNotEmpty;
+  }
+
+  // 上拉加载商品
+  void onLoading() async {
+    if (newProductProductList.isNotEmpty) {
+      try {
+        var isEmpty = await _loadNewsSell(false);
+        if (isEmpty) {
+          // 设置无数据
+          refreshController.loadNoData();
+        } else {
+          // 加载完成
+          refreshController.loadComplete();
+        }
+      } catch (e) {
+        // 加载失败
+        refreshController.loadFailed();
+      }
+    } else {
+      refreshController.loadNoData();
+    }
+    update(["home_news_sell"]);
+  }
+
+  // 下拉刷新
+  void onRefresh() async {
+    try {
+      await _loadNewsSell(true);
+      refreshController.refreshCompleted();
+    } catch (e) {
+      refreshController.refreshFailed();
+    }
+    update(["home_news_sell"]);
+  }
 
   // 分类点击事件
   void onCategoryTap(int categoryId) {
@@ -40,7 +102,7 @@ class HomeController extends GetxController {
     flashShellProductList =
         await ProductApi.products(ProductsReq(featured: true));
     print(flashShellProductList.length);
-    // newProductProductList = await ProductApi.products(ProductsReq());
+
     update(["home"]);
   }
 
@@ -60,8 +122,9 @@ class HomeController extends GetxController {
     _initData();
   }
 
-  // @override
-  // void onClose() {
-  //   super.onClose();
-  // }
+  @override
+  void onClose() {
+    super.onClose();
+    refreshController.dispose();
+  }
 }

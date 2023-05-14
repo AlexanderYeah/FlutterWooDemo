@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_woo_demo/common/components/carousel.dart';
 import 'package:flutter_woo_demo/common/index.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'index.dart';
 
@@ -29,9 +30,12 @@ class HomePage extends GetView<HomeController> {
         // list
         _buildFlashShell(),
         // title
-        Text(LocaleKeys.gHomeNewProduct.tr)
-            .sliverToBoxAdapter()
-            .sliverPaddingHorizontal(AppSpace.page),
+        controller.newProductProductList.isNotEmpty
+            ? BuildListTitle(
+                title: LocaleKeys.gHomeNewProduct.tr,
+                onTap: () => controller.onAllTap(false),
+              ).sliverToBoxAdapter().sliverPaddingHorizontal(AppSpace.page)
+            : const SliverToBoxAdapter(),
         // list
         _buildNewShell(),
       ],
@@ -46,11 +50,16 @@ class HomePage extends GetView<HomeController> {
       id: "home",
       builder: (_) {
         return Scaffold(
-          appBar: _buildAppBar(),
-          body: SafeArea(
-            child: _buildView(),
-          ),
-        );
+            appBar: _buildAppBar(),
+            // SmartRefresher 实现上下拉效果，child 子元素必须是一个 ScrollView 可滚动组件
+            body: SmartRefresher(
+              controller: controller.refreshController,
+              enablePullUp: true,
+              onRefresh: controller.onRefresh,
+              onLoading: controller.onLoading,
+              child: _buildView(),
+              footer: const SmartRefresherFooterWidget(), // 底部加载更多
+            ));
       },
     );
   }
@@ -121,11 +130,27 @@ class HomePage extends GetView<HomeController> {
         .sliverPaddingHorizontal(AppSpace.page);
   }
 
-  // 分类New Shell
+  // 分类New
   Widget _buildNewShell() {
-    return Container()
-        .sliverToBoxAdapter()
-        .sliverPaddingHorizontal(AppSpace.page);
+    return GetBuilder<HomeController>(
+      id: "home_news_sell",
+      builder: (controller) {
+        return SliverGrid.builder(
+          itemCount: controller.newProductProductList.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: AppSpace.listRow,
+              crossAxisSpacing: AppSpace.listItem,
+              childAspectRatio: 0.8),
+          itemBuilder: (context, index) {
+            var product = controller.newProductProductList[index];
+            return ProductItemWidget(product, imgHeight: 170.w);
+          },
+        )
+            .sliverPadding(bottom: AppSpace.page)
+            .sliverPaddingHorizontal(AppSpace.page);
+      },
+    );
   }
 
   // 分类Flash Shell
