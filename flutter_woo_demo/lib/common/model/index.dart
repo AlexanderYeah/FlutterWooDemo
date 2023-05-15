@@ -10,3 +10,4 @@ export './kv.dart';
 export './woo/category_model/category_model.dart';
 export './woo/product_model/product_model.dart';
 export './request/product.dart';
+export './woo/attribute_model/attribute_model.dart';

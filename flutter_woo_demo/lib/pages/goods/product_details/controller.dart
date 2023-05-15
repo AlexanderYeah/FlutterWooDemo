@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_woo_demo/common/api/index.dart';
 import 'package:flutter_woo_demo/common/index.dart';
@@ -22,16 +24,33 @@ class ProductDetailsController extends GetxController
   late TabController tabController;
   // tab 控制器
   int tabIndex = 0;
+  // 颜色列表
+  List<KeyValueModel<AttributeModel>> colors = [];
+  // 选中的颜色列表
+  List<String> colorKeys = [];
 
   _initData() async {
     await _loadProduct();
+    await _loadCache();
     tabController = TabController(length: 3, vsync: this);
     update(["product_details"]);
   }
 
+  _loadCache() async {
+    // 颜色列表
+    var stringColor =
+        Storage().getString(Constants.storageProductsAttributesColors);
+    colors = stringColor != ""
+        ? jsonDecode(stringColor).map<KeyValueModel<AttributeModel>>((item) {
+            var attr = AttributeModel.fromJson(item);
+            return KeyValueModel(key: "${attr.name}", value: attr);
+          }).toList()
+        : [];
+  }
+
   _loadProduct() async {
     product = await ProductApi.productDetail(productId);
-    print(product);
+
     if (product?.images != null) {
       bannerItems = product!.images!.map<KeyValueModel>((e) {
         return KeyValueModel(key: "${e.id}", value: e.src ?? "");
@@ -54,6 +73,11 @@ class ProductDetailsController extends GetxController
     Get.to(GalleryWidget(
         initialIndex: index,
         items: bannerItems.map<String>((e) => e.value).toList()));
+  }
+
+  void onColorTap(List<String> keys) {
+    colorKeys = keys;
+    update(["product_colors"]);
   }
 
   void onTap() {}

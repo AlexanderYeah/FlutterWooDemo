@@ -6,6 +6,8 @@ import 'package:flutter_woo_demo/pages/goods/product_details/widgets/tab_product
 import 'package:get/get.dart';
 
 import 'index.dart';
+import 'widgets/tab_detail.dart';
+import 'widgets/tab_reviews.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   const ProductDetailsPage({Key? key}) : super(key: key);
@@ -116,12 +118,12 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
         child: Padding(
       padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 0),
       child: TabBarView(controller: controller.tabController, children: [
-        // 规格
-        TabProductView(uniqueTag: uniqueTag),
-        // 评论
-        TabProductView(uniqueTag: uniqueTag),
         // 详情
         TabProductView(uniqueTag: uniqueTag),
+        // 规格
+        TabDetailView(uniqueTag: uniqueTag),
+        // 评论
+        TabReviewsView(uniqueTag: uniqueTag),
       ]),
     ));
   }

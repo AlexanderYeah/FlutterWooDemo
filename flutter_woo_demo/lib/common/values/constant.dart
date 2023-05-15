@@ -24,4 +24,6 @@ class Constants {
   static const storageHomeNewSell = 'home_new_sell';
 
   static const storageProductsCategories = 'home_categories';
+  // 颜色定义
+  static const storageProductsAttributesColors = 'products_attributes_colors';
 }

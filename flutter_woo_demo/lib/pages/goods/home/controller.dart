@@ -113,6 +113,12 @@ class HomeController extends GetxController {
     Storage().setJson(Constants.storageHomeFlashSell, flashShellProductList);
     Storage().setJson(Constants.storageHomeNewSell, newProductProductList);
     Storage().setJson(Constants.storageProductsCategories, catogoryItems);
+    // 拉取颜色定义
+    var attributeColors = await ProductApi.attributes(1);
+    // 保存离线数据
+    Storage()
+        .setJson(Constants.storageProductsAttributesColors, attributeColors);
+
     // 显示占位图
     await Future.delayed(const Duration(seconds: 1));
     update(["home"]);
