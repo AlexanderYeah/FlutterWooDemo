@@ -68,6 +68,7 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
           items: controller.bannerItems,
           currentIndex: controller.bannerCurrentIndex,
           onPageChanged: controller.onChangeBanner,
+          onTap: controller.onGalleryTap,
           height: 190.w,
           indicatorCircle: false,
           indicatorAlignment: MainAxisAlignment.start,

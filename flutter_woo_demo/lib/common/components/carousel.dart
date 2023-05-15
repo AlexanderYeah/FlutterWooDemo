@@ -30,6 +30,7 @@ class CarouselWidget extends StatelessWidget {
             return ImageWidget.url(
               items[index].value,
               fit: BoxFit.fill,
+              placeholder: Image.asset(AssetsImages.homePlaceholderPng),
             ).onTap(() {
               if (onTap != null) {
                 onTap!(index, items[index]);
