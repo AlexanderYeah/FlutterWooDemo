@@ -38,6 +38,12 @@ class ProductDetailsController extends GetxController
     await _loadProduct();
     await _loadCache();
     tabController = TabController(length: 3, vsync: this);
+    // 滚动监听 联动效果
+    tabController.addListener(() {
+      tabIndex = tabController.index;
+      update(["product_tab"]);
+    });
+
     update(["product_details"]);
   }
 
