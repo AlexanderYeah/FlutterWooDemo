@@ -153,7 +153,10 @@ class HomePage extends GetView<HomeController> {
               childAspectRatio: 0.8),
           itemBuilder: (context, index) {
             var product = controller.newProductProductList[index];
-            return ProductItemWidget(product, imgHeight: 170.w);
+            return ProductItemWidget(
+              product,
+              imgHeight: 170.w,
+            );
           },
         )
             .sliverPadding(bottom: AppSpace.page)

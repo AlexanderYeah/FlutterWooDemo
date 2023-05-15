@@ -43,6 +43,11 @@ class RoutePages {
         name: RouteNames.goodsProductList, page: () => const ProductListPage()),
     // Category
     GetPage(name: RouteNames.goodsCategory, page: () => const CategoryPage()),
+    // ProductDetail
+    GetPage(
+      name: RouteNames.goodsProductDetails,
+      page: () => const ProductDetailsPage(),
+    ),
     // style index
     GetPage(name: '/style_index', page: () => const StyleIndexPage())
   ];

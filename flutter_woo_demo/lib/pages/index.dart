@@ -13,3 +13,4 @@ export './my/my_index/index.dart';
 export './goods/home/index.dart';
 export './goods/product_list/index.dart';
 export './goods/category/index.dart';
+export './goods/product_details/index.dart';
