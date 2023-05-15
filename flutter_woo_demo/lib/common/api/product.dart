@@ -1,4 +1,5 @@
 import 'package:flutter_woo_demo/common/model/request/product.dart';
+import 'package:flutter_woo_demo/common/model/woo/review_model/review_model.dart';
 
 import '../index.dart';
 
@@ -45,5 +46,16 @@ class ProductApi {
       (a, b) => a.menuOrder!.compareTo(b.menuOrder as int),
     );
     return attributes;
+  }
+
+  // 评论列表
+  static Future<List<ReviewModel>> reviews(ReviewsReq? req) async {
+    var res =
+        await WPHttpService.to.get("/products/reviews", params: req?.toJson());
+    List<ReviewModel> reviews = [];
+    for (var item in res.data) {
+      reviews.add(ReviewModel.fromJson(item));
+    }
+    return reviews;
   }
 }
