@@ -29,6 +29,11 @@ class ProductDetailsController extends GetxController
   // 选中的颜色列表
   List<String> colorKeys = [];
 
+  // 尺寸列表
+  List<KeyValueModel<AttributeModel>> sizes = [];
+  // 选中的尺寸列表
+  List<String> sizeKeys = [];
+
   _initData() async {
     await _loadProduct();
     await _loadCache();
@@ -46,6 +51,16 @@ class ProductDetailsController extends GetxController
             return KeyValueModel(key: "${attr.name}", value: attr);
           }).toList()
         : [];
+    // 尺寸列表
+    var stringSizes =
+        Storage().getString(Constants.storageProductsAttributesSizes);
+
+    sizes = stringSizes != ""
+        ? jsonDecode(stringSizes).map<KeyValueModel<AttributeModel>>((item) {
+            var arrt = AttributeModel.fromJson(item);
+            return KeyValueModel(key: "${arrt.name}", value: arrt);
+          }).toList()
+        : [];
   }
 
   _loadProduct() async {
@@ -56,6 +71,29 @@ class ProductDetailsController extends GetxController
         return KeyValueModel(key: "${e.id}", value: e.src ?? "");
       }).toList();
     }
+
+    if (product?.attributes != null) {
+      // 初始化颜色和尺寸
+
+      // 颜色
+      var colorAttr =
+          product?.attributes?.where((element) => element.name == "Color");
+      if (colorAttr?.isNotEmpty == true) {
+        colorKeys = colorAttr?.first.options ?? [];
+      }
+
+      // 尺寸
+      var sizeAttr =
+          product?.attributes?.where((element) => element.name == "Size");
+      if (sizeAttr?.isNotEmpty == true) {
+        sizeKeys = sizeAttr?.first.options ?? [];
+      }
+    }
+  }
+
+  void onSizeTap(List<String> keys) async {
+    sizeKeys = keys;
+    update(["product_sizes"]);
   }
 
   void onTabBarTap(int index) {

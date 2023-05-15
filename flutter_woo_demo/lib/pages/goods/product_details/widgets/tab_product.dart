@@ -17,7 +17,7 @@ class TabProductView extends GetView<ProductDetailsController> {
       _buildTitle("Color"),
       GetBuilder<ProductDetailsController>(
         id: "product_colors",
-        tag: tag,
+        tag: uniqueTag,
         builder: (controller) {
           return ColorsListWidget(
             itemList: controller.colors,
@@ -27,6 +27,18 @@ class TabProductView extends GetView<ProductDetailsController> {
           ).paddingBottom(AppSpace.listRow * 2);
         },
       ),
+      _buildTitle("Size"),
+      GetBuilder<ProductDetailsController>(
+        id: "product_sizes",
+        tag: uniqueTag,
+        builder: (controller) {
+          return TagsListWidget(
+            itemList: controller.sizes,
+            keys: controller.sizeKeys,
+            onTap: controller.onSizeTap,
+          ).paddingBottom(AppSpace.listRow * 2);
+        },
+      )
     ]
         .toColumn(crossAxisAlignment: CrossAxisAlignment.start)
         .paddingVertical(AppSpace.page);
