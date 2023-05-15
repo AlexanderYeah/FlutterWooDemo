@@ -43,7 +43,6 @@ class ProductDetailsController extends GetxController
       tabIndex = tabController.index;
       update(["product_tab"]);
     });
-
     update(["product_details"]);
   }
 
