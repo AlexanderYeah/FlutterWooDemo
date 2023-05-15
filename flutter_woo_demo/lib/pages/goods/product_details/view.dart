@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_woo_demo/common/components/carousel.dart';
 import 'package:flutter_woo_demo/common/index.dart';
 import 'package:get/get.dart';
 
@@ -58,7 +60,21 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
 
   // 滚动图
   Widget _buildBanner() {
-    return Text("111");
+    return GetBuilder<ProductDetailsController>(
+      id: "product_banner",
+      tag: tag,
+      builder: (controller) {
+        return CarouselWidget(
+          items: controller.bannerItems,
+          currentIndex: controller.bannerCurrentIndex,
+          onPageChanged: controller.onChangeBanner,
+          height: 190.w,
+          indicatorCircle: false,
+          indicatorAlignment: MainAxisAlignment.start,
+          indicatorColor: AppColors.highlight,
+        );
+      },
+    ).backgroundColor(AppColors.surfaceVariant);
   }
 
   // 商品标题
