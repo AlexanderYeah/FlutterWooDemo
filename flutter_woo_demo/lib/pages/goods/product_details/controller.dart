@@ -1,8 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_woo_demo/common/api/index.dart';
 import 'package:flutter_woo_demo/common/index.dart';
 import 'package:get/get.dart';
 
-class ProductDetailsController extends GetxController {
+// GetSingleTickerProviderStateMixin 是 TickerProvider 的实现，
+// 当需要使用 Animation controller 时，需要在控制器初始化时传递一个 vsync 参数，此时需要用到 TickerProvider
+
+class ProductDetailsController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   ProductDetailsController();
 
   // 接收的id
@@ -13,9 +18,14 @@ class ProductDetailsController extends GetxController {
   List<KeyValueModel> bannerItems = [];
   // banner 当前的位置
   int bannerCurrentIndex = 0;
+  // tab 控制器
+  late TabController tabController;
+  // tab 控制器
+  int tabIndex = 0;
 
   _initData() async {
     await _loadProduct();
+    tabController = TabController(length: 3, vsync: this);
     update(["product_details"]);
   }
 
@@ -27,6 +37,12 @@ class ProductDetailsController extends GetxController {
         return KeyValueModel(key: "${e.id}", value: e.src ?? "");
       }).toList();
     }
+  }
+
+  void onTabBarTap(int index) {
+    tabIndex = index;
+    tabController.animateTo(index);
+    update(["product_tab"]);
   }
 
   void onChangeBanner(int index, _reason) {
@@ -53,8 +69,9 @@ class ProductDetailsController extends GetxController {
     _initData();
   }
 
-  // @override
-  // void onClose() {
-  //   super.onClose();
-  // }
+  @override
+  void onClose() {
+    super.onClose();
+    tabController.dispose();
+  }
 }
