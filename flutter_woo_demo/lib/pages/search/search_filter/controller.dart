@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 
-class SearchController extends GetxController {
-  SearchController();
+class SearchFilterController extends GetxController {
+  SearchFilterController();
 
   _initData() {
-    update(["search"]);
+    update(["search_filter"]);
   }
 
   void onTap() {}

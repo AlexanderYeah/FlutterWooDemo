@@ -48,6 +48,16 @@ class RoutePages {
       name: RouteNames.goodsProductDetails,
       page: () => const ProductDetailsPage(),
     ),
+    // Search Index
+    GetPage(
+      name: RouteNames.searchSearchIndex,
+      page: () => const SearchIndexPage(),
+    ),
+    // Search Filter
+    GetPage(
+      name: RouteNames.searchSearchFilter,
+      page: () => const SearchFilterPage(),
+    ),
     // style index
     GetPage(name: '/style_index', page: () => const StyleIndexPage())
   ];

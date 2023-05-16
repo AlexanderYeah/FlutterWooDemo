@@ -127,7 +127,9 @@ class HomeController extends GetxController {
   }
 
   //  标题栏的点击
-  void onTapAppBar() {}
+  void onTapAppBar() {
+    Get.toNamed(RouteNames.searchSearchIndex);
+  }
 
   void onTap() {}
 
