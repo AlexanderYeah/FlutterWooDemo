@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_woo_demo/common/api/index.dart';
+import 'package:flutter_woo_demo/common/index.dart';
 import 'package:get/get.dart';
 
 class SearchIndexController extends GetxController {
@@ -10,8 +12,25 @@ class SearchIndexController extends GetxController {
   // 搜索关键词
   final searchKeyWord = "".obs;
 
+  // 搜索tag数据
+  List<TagModel> tagsList = [];
+
   _initData() {
     update(["search_index"]);
+  }
+
+  Future<bool> _loadSearch(String keyword) async {
+    if (keyword.trim().isEmpty == true) {
+      tagsList.clear();
+      return tagsList.isEmpty;
+    }
+    // 拉取数据
+    var res = await ProductApi.tags(TagsReq(search: keyword));
+    tagsList.clear();
+    if (res.isNotEmpty) {
+      tagsList.addAll(res);
+    }
+    return tagsList.isEmpty;
   }
 
   // 搜索栏防抖动
@@ -22,6 +41,7 @@ class SearchIndexController extends GetxController {
         print("debounce->" + value.toString());
       }
       // 拉取数据
+      await _loadSearch(value as String);
       update(["search_index"]);
     },
         // 延迟500毫秒
@@ -29,6 +49,11 @@ class SearchIndexController extends GetxController {
     searcgEditController.addListener(() {
       searchKeyWord.value = searcgEditController.text;
     });
+  }
+
+  // 列表点击事件
+  void onListItemTap(TagModel model) {
+    print("object");
   }
 
   void onTap() {}

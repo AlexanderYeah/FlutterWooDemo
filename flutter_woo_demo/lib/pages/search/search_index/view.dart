@@ -9,9 +9,7 @@ class SearchIndexPage extends GetView<SearchIndexController> {
 
   // 主视图
   Widget _buildView() {
-    return const Center(
-      child: Text("SearchIndexPage"),
-    );
+    return Center(child: _buildList());
   }
 
   @override
@@ -40,6 +38,29 @@ class SearchIndexPage extends GetView<SearchIndexController> {
           printInfo(info: val);
         },
       ).paddingRight(AppSpace.page),
+    );
+  }
+
+  Widget _buildList() {
+    return ListView.separated(
+        itemBuilder: (context, index) {
+          TagModel model = controller.tagsList[index];
+          return _buildListItem(model);
+        },
+        separatorBuilder: (context, index) {
+          return const Divider();
+        },
+        itemCount: controller.tagsList.length);
+  }
+
+  Widget _buildListItem(TagModel item) {
+    return ListTile(
+      title: TextWidget.body1(item.name ?? ""),
+      trailing: IconWidget.icon(
+        Icons.north_west,
+        color: AppColors.primary,
+      ),
+      onTap: () => controller.onListItemTap(item),
     );
   }
 }
