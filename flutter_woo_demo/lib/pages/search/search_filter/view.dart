@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_woo_demo/common/index.dart';
 import 'package:flutter_woo_demo/pages/search/search_filter/widgets/filter_view.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'index.dart';
 
@@ -11,7 +12,23 @@ class SearchFilterPage extends GetView<SearchFilterController> {
 
   // 主视图
   Widget _buildView() {
-    return <Widget>[_buildFilterBar(), _buildListView()].toColumn();
+    return <Widget>[
+      _buildFilterBar(),
+
+      // 数据列表
+      SmartRefresher(
+        controller: controller.refreshController, // 刷新控制器
+        enablePullUp: true, // 启用上拉加载
+        onRefresh: controller.onRefresh, // 下拉刷新回调
+        onLoading: controller.onLoading, // 上拉加载回调
+        footer: const SmartRefresherFooterWidget(), // 底部加载更多
+        child: CustomScrollView(
+          slivers: [
+            _buildListView().sliverPaddingHorizontal(AppSpace.button),
+          ],
+        ),
+      ).expanded(),
+    ].toColumn();
   }
 
   @override
@@ -86,7 +103,30 @@ class SearchFilterPage extends GetView<SearchFilterController> {
     return Text("搜索栏");
   }
 
+  // 数据列表
   Widget _buildListView() {
-    return Text("数据列表");
+    return GetBuilder<SearchFilterController>(
+      id: "filter_products",
+      builder: (_) {
+        return controller.items.isEmpty
+            ?
+            // 占位图
+            const PlaceholdWidget().sliverBox
+            :
+            // 数据列表
+            SliverGrid.extent(
+                maxCrossAxisExtent: 120,
+                mainAxisSpacing: AppSpace.listRow, // 主轴间距
+                crossAxisSpacing: AppSpace.listItem, // 交叉轴间距
+                childAspectRatio: 0.7, // 宽高比
+                children: controller.items.map((product) {
+                  return ProductItemWidget(
+                    product, // 商品
+                    imgHeight: 117.w, // 图片高度
+                  );
+                }).toList(),
+              );
+      },
+    );
   }
 }
