@@ -13,6 +13,7 @@ enum ButtonWidgetType {
   iconTextOutlined, // 图标/文字/边框
   iconTextUpDownOutlined, // 图标/文字/上下/边框
   textIcon, // 文字/图标
+  dropdown, //
 }
 
 /// 按钮
@@ -289,11 +290,41 @@ class ButtonWidget extends StatelessWidget {
         ),
         super(key: key);
 
+  /// 文字 / 图标 / dropdown
+  ButtonWidget.dropdown(
+    this.text,
+    this.icon, {
+    Key? key,
+    Color? textColor,
+    double? textSize,
+    FontWeight? textWeight,
+    this.type = ButtonWidgetType.dropdown,
+    this.onTap,
+    this.borderRadius = 0,
+    this.backgroundColor,
+    this.borderColor,
+    this.width,
+    this.height,
+  })  : child = <Widget>[
+          TextWidget.button(
+            text: text!,
+            size: textSize,
+            color: textColor ?? AppColors.onPrimaryContainer,
+            weight: textWeight,
+          ).expanded(),
+          icon!,
+        ]
+            .toRow(
+              mainAxisSize: MainAxisSize.min,
+            )
+            .paddingHorizontal(AppSpace.button),
+        super(key: key);
   // 背景
   MaterialStateProperty<Color?>? get _backgroundColor {
     switch (type) {
       case ButtonWidgetType.primary:
         return MaterialStateProperty.all(backgroundColor ?? AppColors.primary);
+
       default:
         return MaterialStateProperty.all(backgroundColor ?? Colors.transparent);
     }
@@ -309,6 +340,11 @@ class ButtonWidget extends StatelessWidget {
         ));
       case ButtonWidgetType.iconTextOutlined:
       case ButtonWidgetType.iconTextUpDownOutlined:
+        return MaterialStateProperty.all(BorderSide(
+          color: borderColor ?? AppColors.outline,
+          width: 1,
+        ));
+      case ButtonWidgetType.dropdown:
         return MaterialStateProperty.all(BorderSide(
           color: borderColor ?? AppColors.outline,
           width: 1,
@@ -332,6 +368,7 @@ class ButtonWidget extends StatelessWidget {
   MaterialStateProperty<OutlinedBorder?>? get _shape {
     switch (type) {
       case ButtonWidgetType.primary:
+      case ButtonWidgetType.dropdown:
       case ButtonWidgetType.secondary:
         return MaterialStateProperty.all(
           RoundedRectangleBorder(

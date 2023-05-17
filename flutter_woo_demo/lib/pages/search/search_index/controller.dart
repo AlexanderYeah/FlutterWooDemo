@@ -53,7 +53,7 @@ class SearchIndexController extends GetxController {
 
   // 列表点击事件
   void onListItemTap(TagModel model) {
-    print("object");
+    Get.toNamed(RouteNames.searchSearchFilter, arguments: {"tagId": model.id});
   }
 
   void onTap() {}
