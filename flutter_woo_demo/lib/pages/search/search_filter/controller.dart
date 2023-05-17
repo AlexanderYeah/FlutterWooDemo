@@ -37,6 +37,15 @@ class SearchFilterController extends GetxController {
   // 选中颜色列表
   List<String> colorKeys = [];
 
+  // 星级
+  int starValue = -1;
+
+  // 星级选中
+  void onStarTap(int value) {
+    starValue = value;
+    update(["filter_stars"]);
+  }
+
   // 价格拖动区间
   void onPriceRangeDragging(
       int handleIndex, dynamic lowerValue, dynamic upperValue) {
