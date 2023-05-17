@@ -103,7 +103,12 @@ class HomeController extends GetxController {
   _initData() async {
     bannerItems = await SystemApi.banners();
     catogoryItems = await ProductApi.catogroies();
-
+    // 品牌
+    var attributeBrand = await ProductApi.attributes(3);
+    // 性别
+    var attributeGender = await ProductApi.attributes(4);
+    // 新旧
+    var attributeCondition = await ProductApi.attributes(5);
     flashShellProductList =
         await ProductApi.products(ProductsReq(featured: true));
     print(flashShellProductList.length);
@@ -113,6 +118,14 @@ class HomeController extends GetxController {
     Storage().setJson(Constants.storageHomeFlashSell, flashShellProductList);
     Storage().setJson(Constants.storageHomeNewSell, newProductProductList);
     Storage().setJson(Constants.storageProductsCategories, catogoryItems);
+    // 保存离线数据
+    Storage().setString(
+        Constants.storageProductsAttributesBrand, jsonEncode(attributeBrand));
+    Storage().setString(
+        Constants.storageProductsAttributesGender, jsonEncode(attributeGender));
+    Storage().setString(Constants.storageProductsAttributesCondition,
+        jsonEncode(attributeCondition));
+
     // 拉取颜色定义
     var attributeColors = await ProductApi.attributes(1);
     var attributeSizes = await ProductApi.attributes(2);
