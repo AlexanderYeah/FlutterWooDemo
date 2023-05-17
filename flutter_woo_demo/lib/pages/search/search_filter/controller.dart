@@ -1,4 +1,8 @@
+import 'dart:convert';
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_woo_demo/common/index.dart';
 import 'package:flutter_woo_demo/common/model/index.dart';
 import 'package:get/get.dart';
 
@@ -19,6 +23,29 @@ class SearchFilterController extends GetxController {
 
   KeyValueModel orderSelected =
       KeyValueModel(key: "rating", value: "Best Match");
+
+  // 价格范围
+  final List<double> priceRange = [100, 1000];
+
+  // 尺寸列表
+  List<KeyValueModel<AttributeModel>> sizes = [];
+  // 尺寸
+  List<String> sizeKeys = [];
+
+  // 价格拖动区间
+  void onPriceRangeDragging(
+      int handleIndex, dynamic lowerValue, dynamic upperValue) {
+    priceRange[0] = lowerValue as double;
+    priceRange[1] = upperValue as double;
+    update(["filter_price_range"]);
+  }
+
+  // 尺寸选中
+  void onSizeTap(List<String> keys) {
+    sizeKeys = keys;
+    update(["filter_sizes"]);
+  }
+
   void onOrderTap(KeyValueModel? val) {
     orderSelected = val!;
     update(["search_filter"]);
@@ -40,10 +67,24 @@ class SearchFilterController extends GetxController {
 
   void onTap() {}
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  // }
+  // 读取缓存
+  void _loadCache() async {
+    // 尺寸列表
+    {
+      String result =
+          Storage().getString(Constants.storageProductsAttributesSizes);
+      sizes = jsonDecode(result).map<KeyValueModel<AttributeModel>>((item) {
+        var arrt = AttributeModel.fromJson(item);
+        return KeyValueModel(key: "${arrt.name}", value: arrt);
+      }).toList();
+    }
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    _loadCache();
+  }
 
   @override
   void onReady() {

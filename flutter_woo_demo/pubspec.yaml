@@ -53,6 +53,7 @@ dependencies:
   pull_to_refresh: ^2.0.0
   photo_view: ^0.14.0
   dropdown_button2: ^2.1.2
+  another_xlider: ^3.0.1
 
 dev_dependencies:
   flutter_test:
